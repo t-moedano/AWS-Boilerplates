@@ -1,0 +1,55 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  Stage:
+    Type: String
+    Default: #insert stage
+  Region:
+    Type: String
+    Default: #insert your region
+
+Resources:
+#Api Gateway which will invoke redirect lambda trigger
+  RedirectApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref Stage
+      Cors:
+        AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+        AllowHeaders: "'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token'"
+        AllowOrigin: "'*'"
+
+#Lambda which will be triggered by Cognito
+  MessageTriggerLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./../
+      Role: #insert you lambda role
+      Handler: app/request/index.customMessage
+      Runtime: nodejs8.10
+      Environment:
+        Variables: 
+          STAGE: !Ref Stage
+          REGION: !Ref Region
+
+#Lambda which will be triggered by the gateway to redirect user
+  RedirectAPIMobile:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./../
+      Role: #insert your lambda-role
+      Handler: app/request/index.redirect
+      Runtime: nodejs8.10
+      Environment:
+        Variables: 
+          STAGE: !Ref Stage
+          REGION: !Ref Region
+      Events:
+        Redirect:
+          Type: Api
+          Properties:
+            Path: /redirect
+            Method: get
+            RestApiId:
+              Ref: RedirectApi
