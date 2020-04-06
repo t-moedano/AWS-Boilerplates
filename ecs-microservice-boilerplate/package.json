@@ -1,0 +1,20 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/server/server.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cucumber": "^6.0.5",
+    "jest": "^25.2.7",
+    "koa": "^1.7.0",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^5.4.2",
+    "supertest": "^4.0.2"
+  },
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "jest"
+  }
+}
