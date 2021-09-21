@@ -1,4 +1,4 @@
-## Olá, bem vindo ao repositório de aprendizado! 👋
+## Hello, welcome to this learning repository! 👋
 
 
 ## Install
@@ -7,11 +7,20 @@
 yarn install 
 ```
 
-## Autora
+## How to use
+
+1. Clone this repository
+2. Go to methods.ts, you will see an blank function
+3. Try out this function
+4. Run tsc
+5. Zip the generated file
+6. Upload to Lambda in AWS and test
+
+## Author
 
 👤 **Thauany Moedano**
 
 
-## Mostre seu suporte :D
+## Show your support!
 
-Dê uma ⭐️ se você aprendeu com esse projeto!
+Give a ⭐️ if you liked this project!
